@@ -1,4 +1,8 @@
-build*/
+test*
+build*
 *.o
+*.a
+*.so
 .vscode/
+.vs/
 .idea/
