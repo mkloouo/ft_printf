@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   my_string2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/28 14:17:56 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/24 20:58:14 by modnosum         ###   ########.fr       */
+/*   Created: 2018/07/24 20:32:32 by modnosum          #+#    #+#             */
+/*   Updated: 2018/07/24 20:36:20 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <my_string.h>
+#include <stdlib.h>
 
-# include <stdarg.h>
-# include <inttypes.h>
+void		my_strnew(char **s, size_t size)
+{
+	size_t	i;
 
-# define ENULLFMT (-1)
+	*s = malloc(sizeof(char) * size);
+	i = 0;
+	while (i < size)
+		(*s)[i++] = 0;
+}
 
-int	ft_printf(const char *fmt, ...);
+size_t		my_strlen(char const *str)
+{
+	size_t	len;
 
-#endif
+	len = 0;
+	while (str[len])
+		++len;
+	return (len);
+}
