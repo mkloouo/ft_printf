@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:55:35 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/24 20:59:55 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:53:01 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ typedef enum			e_size_f
 }						t_size_f;
 
 typedef struct			s_info {
-	int					width;
-	int					precision;
+	size_t				width;
+	size_t				precision;
 
 	unsigned int		is_alt:1;
 	unsigned int		is_zero_padd:1;
 	unsigned int		is_left_adj:1;
 	unsigned int		is_space:1;
 	unsigned int		is_plus:1;
+
+	unsigned int		no_prec:1;
 
 	t_size_f			size_flag;
 	char				specifier;
@@ -66,6 +68,7 @@ void					clear_info(t_info *info);
 void					init_info(t_info *info);
 void					update_result(t_info *info, const char *str,
 						size_t n);
-void					print_result(const char *fmt, const char *p, t_info *info);
+void					print_result(const char *fmt, const char *p,
+						t_info *info);
 
 #endif

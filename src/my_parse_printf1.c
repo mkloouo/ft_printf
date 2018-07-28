@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/24 20:54:11 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:58:14 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <my_parse_printf.h>
 
-void			my_parse_star(char const **fmt, int *number,
+void			my_parse_star(char const **fmt, size_t *number,
 				va_list *args)
 {
 	if (**fmt == '*')
@@ -88,7 +88,10 @@ int				my_validate_arg(char const **pos, char const **fmt,
 	my_parse_flags(fmt, info);
 	my_parse_star(fmt, &info->width, args);
 	if (**fmt == '.' && ++*fmt)
+	{
+		info->no_prec = 0;
 		my_parse_star(fmt, &info->precision, args);
+	}
 	my_parse_size_flags(fmt, info);
 	if (!(is_valid = my_parse_specifier(fmt, info)))
 		*pos = save;

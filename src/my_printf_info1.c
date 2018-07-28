@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:57:07 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/24 20:59:36 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/07/28 20:41:42 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ void			clear_info(t_info *info)
 	if (!info->init)
 	{
 		info->cur = 0;
-		my_strnew(&info->result, (info->size = 200));
+		info->size = 200;
+		info->result = my_strnew(info->size, 0);
 		info->init = 1;
 	}
 	info->width = 0;
-	info->precision = -1;
+	info->precision = 0;
 	info->is_alt = 0;
 	info->is_left_adj = 0;
 	info->is_plus = 0;
 	info->is_space = 0;
 	info->is_zero_padd = 0;
+	info->no_prec = 1;
 	info->size_flag = NO_SIZE;
 	info->specifier = 0;
 	info->data.p = 0;
@@ -55,7 +57,8 @@ void			update_result(t_info *info, const char *str, size_t n)
 {
 	if (n > (info->size - info->cur))
 	{
-		my_resize_str(info->result, info->size, (info->size * 2) + n);
+		info->result = my_resize_str(info->result, info->size,
+									(info->size * 2) + n);
 		info->size = (info->size * 2) + n;
 	}
 	my_strncpy((info->result + info->cur), str, n);

@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_string2.c                                       :+:      :+:    :+:   */
+/*   my_form_arg2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/24 20:32:32 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 18:21:34 by modnosum         ###   ########.fr       */
+/*   Created: 2018/07/28 17:01:27 by modnosum          #+#    #+#             */
+/*   Updated: 2018/07/28 17:41:19 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <my_string.h>
-#include <stdlib.h>
+#include <my_form_arg.h>
 
-char		*my_strnew(size_t size, char c)
+void			manage_letters(va_list *args, t_info *info)
 {
-	char	*str;
-	size_t	i;
-
-	str = malloc(sizeof(char) * (size + 1));
-	i = 0;
-	while (i < size)
-		str[i++] = c;
-	return (str);
-}
-
-size_t		my_strlen(char const *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		++len;
-	return (len);
+	if (info->specifier == 's')
+	{
+		if (info->size_flag == LONG_SIZE)
+			info->data.ws = va_arg(*args, const wchar_t*);
+		else
+			info->data.s = va_arg(*args, const char*);
+	}
+	else
+	{
+		if (info->size_flag == LONG_SIZE)
+			info->data.wc = va_arg(*args, wchar_t);
+		else
+			info->data.c = va_arg(*args, int);
+	}
 }

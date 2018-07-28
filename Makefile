@@ -1,5 +1,6 @@
 CC := gcc
-CFLAGS := -g #-Wall -Werror -Wextra -pedantic
+CFLAGS := -g -Wall -Werror -Wextra -pedantic
+TFLAGS := -g
 IFLAGS := -I ./inc
 
 NAME := libftprintf.a
@@ -35,5 +36,5 @@ build:
 $(NAME): $(OBJS)
 	ar -crs $@ $^
 
-test: test.c $(NAME)
-	$(CC) $(CFLAGS) -o $@ $(IFLAGS) $^
+tests: tests.c $(NAME)
+	$(CC) $(TFLAGS) -o $@ $(IFLAGS) $^
