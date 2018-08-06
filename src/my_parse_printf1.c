@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 17:58:14 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/02 14:02:59 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ void			my_parse_star(char const **fmt, size_t *number,
 }
 
 void			my_manage_size_flag(char const **fmt, t_info *info,
-				t_size_f new_size)
+				t_size_f new_size, int move)
 {
-	if (new_size == SHORT_SIZE || new_size == LONG_LONG_SIZE)
+	if (move)
+	{
 		++*fmt;
-	if (new_size > info->size)
-		info->size = new_size;
+		new_size += move;
+	}
+	if (new_size > info->size_flag)
+		info->size_flag = new_size;
 }
 
 void			my_parse_size_flags(char const **fmt, t_info *info)
@@ -42,15 +45,15 @@ void			my_parse_size_flags(char const **fmt, t_info *info)
 	while ((f = my_strchr(flags, **fmt)))
 	{
 		if (*f == 'h')
-			my_manage_size_flag(fmt, info, (*(f + 1) == 'h' ? SHORT_SIZE
-														: CHAR_SIZE));
+			my_manage_size_flag(fmt, info, SHORT_SIZE,
+								((*(*fmt + 1) == 'h') ? (-1) : (0)));
 		else if (*f == 'l')
-			my_manage_size_flag(fmt, info, (*(f + 1) == 'l' ? LONG_LONG_SIZE
-														: LONG_SIZE));
+			my_manage_size_flag(fmt, info, LONG_SIZE,
+								((*(*fmt + 1) == 'l') ? (1) : (0)));
 		else if (*f == 'j')
-			my_manage_size_flag(fmt, info, LONG_LONG_SIZE);
+			my_manage_size_flag(fmt, info, LONG_LONG_SIZE, 0);
 		else
-			my_manage_size_flag(fmt, info, SIZE_T_SIZE);
+			my_manage_size_flag(fmt, info, SIZE_T_SIZE, 0);
 		++*fmt;
 	}
 }
