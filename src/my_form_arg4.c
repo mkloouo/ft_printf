@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:05:38 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/02 14:29:18 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 21:36:24 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ static void		form_signed_helper(t_info *info, size_t *nlen,
 				size_t *spos, int *place_sign)
 {
 	*nlen = my_numlen(info->data.ll);
-	if (info->data.ll == 0 && !info->no_prec && info->precision == 0)
+	if (info->data.ll == 0 && info->is_prec && info->precision == 0)
 		*nlen = 0;
 	info->arg_cur = *nlen;
-	info->arg_cur = (info->arg_cur > info->width) ? (info->arg_cur)
-													: (info->width);
-	*nlen = (*nlen > info->precision) ? (*nlen) : (info->precision);
+	if (info->width > info->arg_cur)
+		info->arg_cur = info->width;
+	if (info->precision > *nlen)
+		*nlen = info->precision;
 	info->arg_cur = (info->arg_cur > *nlen) ? (info->arg_cur) : (*nlen);
 	if (!(*place_sign = 0) && ((info->data.ll >= 0 && (info->is_plus ||
 							info->is_space)) || info->data.ll < 0))
@@ -70,12 +71,12 @@ static void		form_signed_helper(t_info *info, size_t *nlen,
 	}
 	info->arg = my_strnew(info->arg_cur, ((info->is_zero_padd &&
 								!info->is_left_adj &&
-								info->no_prec) ? ('0') : (' ')));
-	if (info->no_prec && info->is_zero_padd)
+								!info->is_prec) ? ('0') : (' ')));
+	if (!info->is_prec && info->is_zero_padd)
 		*spos = 0;
 }
 
-void			form_signed(t_info *info)
+static void		form_signed(t_info *info)
 {
 	size_t		nlen;
 	size_t		spos;

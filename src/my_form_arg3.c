@@ -6,14 +6,101 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:04:20 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 17:10:07 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 21:35:55 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <my_form_arg.h>
 
+static size_t	my_numlen(unsigned long long num, int base)
+{
+	size_t		len;
+
+	if (num == 0)
+		return (1);
+	len = 0;
+	while (num)
+	{
+		num /= base;
+		++len;
+	}
+	return (len);
+}
+
+static void		form_digits(t_info *info, size_t nlen, size_t pos, char const *base_chars)
+{
+	unsigned long long	ull;
+	char				*str;
+
+	ull = info->data.ull;
+	str = info->arg;
+	while (nlen)
+	{
+		if (ull)
+		{
+			str[--pos] = base_chars[(ull % info->base)];
+			ull /= info->base;
+		}
+		else
+			str[--pos] = '0';
+		--nlen;
+	}
+}
+
+static void		form_unsigned_helper(t_info *info, size_t *nlen, int *place_sign,
+				char const *base_chars)
+{
+	info->base = my_strlen(base_chars);
+	*nlen = my_numlen(info->data.ull, info->base);
+	if (info->data.ull == 0 &&
+		info->is_prec && info->precision == 0)
+		*nlen = 0;
+	info->arg_cur = *nlen;
+	if (info->width > info->arg_cur)
+		info->arg_cur = info->width;	
+	if (info->precision > *nlen)
+		*nlen = info->precision;
+	if (*nlen > info->arg_cur)
+		info->arg_cur = *nlen;
+	if (!(*place_sign = 0) && (info->data.ull > 0 ||
+		(info->data.ull == 0 && info->specifier == 'o')) &&
+		((info->base == 8 || info->base == 16) && info->is_alt))
+	{
+		*place_sign = (info->base == 16) ? (2) : (1);
+		*nlen += *place_sign;
+		if (*nlen > info->arg_cur)
+			info->arg_cur = *nlen;
+		info->arg_size = (info->is_left_adj) ? (0) : (info->arg_cur - *nlen);
+	}
+	info->arg = my_strnew(info->arg_cur, ((info->is_zero_padd &&
+								!info->is_left_adj &&
+								!info->is_prec) ? ('0') : (' ')));
+	if (!info->is_prec && info->is_zero_padd)
+		info->arg_size = 0;
+}
+
+void			form_unsigned(t_info *info, char const *base_chars)
+{
+	size_t		nlen;
+	int			place_sign;
+
+	form_unsigned_helper(info, &nlen, &place_sign, base_chars);
+	if (info->is_left_adj)
+		form_digits(info, nlen, nlen, base_chars);
+	else
+		form_digits(info, nlen, info->arg_cur, base_chars);
+	if (place_sign)
+	{
+		info->arg[info->arg_size] = '0';
+		if (place_sign > 1)
+			info->arg[info->arg_size + 1] = info->specifier;
+	}
+}
+
 void			manage_unsigned(va_list *args, t_info *info)
 {
+	char const	*base_chars;
+
 	if (info->size_flag == CHAR_SIZE)
 		info->data.ull = (unsigned char)va_arg(*args, unsigned int);
 	else if (info->size_flag == SHORT_SIZE)
@@ -26,24 +113,12 @@ void			manage_unsigned(va_list *args, t_info *info)
 		info->data.st = va_arg(*args, size_t);
 	else
 		info->data.ull = va_arg(*args, unsigned int);
-}
-
-void			manage_unsi(t_info *info)
-{
-	(void)info;
-}
-
-void			manage_octa(t_info *info)
-{
-	(void)info;
-}
-
-void			manage_hexa(t_info *info)
-{
-	(void)info;
-}
-
-void			manage_cap_hexa(t_info *info)
-{
-	(void)info;
+	if (info->specifier == 'u')
+		base_chars = "0123456789";
+	else if (info->specifier == 'o')
+		base_chars = "01234567";
+	else if (info->specifier == 'x' || info->specifier == 'X')
+		base_chars = ((info->specifier == 'x') ? ("0123456789abcdef")
+											: ("0123456789ABCDEF"));
+	form_unsigned(info, base_chars);
 }

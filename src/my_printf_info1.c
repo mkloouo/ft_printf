@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:57:07 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 20:41:42 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 21:44:56 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			clear_info(t_info *info)
 	info->is_plus = 0;
 	info->is_space = 0;
 	info->is_zero_padd = 0;
-	info->no_prec = 1;
+	info->is_prec = 0;
 	info->size_flag = NO_SIZE;
 	info->specifier = 0;
 	info->data.p = 0;

@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 19:34:47 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 20:46:54 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 21:28:29 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void			manage_custom(va_list *args, t_info *info)
 	(void)args;
 	if (info->specifier == '%')
 	{
+		#if defined (__MACH__) || defined (__APPLE__) 
 		info->arg_cur = (info->width) ? (info->width) : (1);
+		#else
+		info->arg_cur = (1);
+		#endif
 		info->arg = my_strnew(info->arg_cur, ' ');
 		info->arg[((info->is_left_adj) ? (0) : (info->arg_cur - 1))] = '%';
 	}
@@ -30,5 +34,5 @@ void			manage_pointer(va_list *args, t_info *info)
 	info->precision = -1;
 	info->specifier = 'x';
 	info->size_flag = LONG_LONG_SIZE;
-	manage_hexa(info);
+	form_unsigned(info, "0123456789abcdef");
 }

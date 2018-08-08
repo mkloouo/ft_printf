@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/02 14:02:59 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 21:35:39 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int				my_parse_specifier(char const **fmt, t_info *info)
 										: (**fmt);
 	if (!(test == 's' || test == 'c' || test == 'u' || test == 'o' ||
 		test == 'x' || test == 'i' || test == 'd' || test == 'p' ||
-		test == '%'))
+		test == '%')
+		#if !defined(__MACH__) && !defined(__APPLE__)
+		|| **fmt == 'U'
+		#endif
+		)
 		return (0);
 	if (**fmt == 'S' || **fmt == 'C' || **fmt == 'U' || **fmt == 'O' ||
 		**fmt == 'D')
@@ -92,7 +96,7 @@ int				my_validate_arg(char const **pos, char const **fmt,
 	my_parse_star(fmt, &info->width, args);
 	if (**fmt == '.' && ++*fmt)
 	{
-		info->no_prec = 0;
+		info->is_prec = 1;
 		my_parse_star(fmt, &info->precision, args);
 	}
 	my_parse_size_flags(fmt, info);

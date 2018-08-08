@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 16:57:02 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 17:51:22 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/08 20:46:14 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void			manage_arg(va_list *args, t_info *info);
 void			manage_letters(va_list *args, t_info *info);
 
 void			manage_unsigned(va_list *args, t_info *info);
-void			manage_unsi(t_info *info);
-void			manage_octa(t_info *info);
-void			manage_hexa(t_info *info);
-void			manage_cap_hexa(t_info *info);
+void			form_unsigned(t_info *info, char const *base_chars);
 
 void			manage_signed(va_list *args, t_info *info);
 void			manage_custom(va_list *args, t_info *info);
