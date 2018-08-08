@@ -27,7 +27,8 @@ static size_t	my_numlen(unsigned long long num, int base)
 	return (len);
 }
 
-static void		form_digits(t_info *info, size_t nlen, size_t pos, char const *base_chars)
+static void		form_digits(t_info *info, size_t nlen, size_t pos,
+				char const *base_chars)
 {
 	unsigned long long	ull;
 	char				*str;
@@ -47,8 +48,8 @@ static void		form_digits(t_info *info, size_t nlen, size_t pos, char const *base
 	}
 }
 
-static void		form_unsigned_helper(t_info *info, size_t *nlen, int *place_sign,
-				char const *base_chars)
+static void		form_unsigned_helper(t_info *info, size_t *nlen,
+				int *place_sign, char const *base_chars)
 {
 	info->base = my_strlen(base_chars);
 	*nlen = my_numlen(info->data.ull, info->base);
@@ -62,9 +63,9 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen, int *place_sign,
 		*nlen = info->precision;
 	if (*nlen > info->arg_cur)
 		info->arg_cur = *nlen;
-	if (!(*place_sign = 0) && (info->data.ull > 0 ||
-		(info->data.ull == 0 && info->specifier == 'o')) &&
-		((info->base == 8 || info->base == 16) && info->is_alt))
+	if (!(*place_sign = 0) && (info->data.ull > 0 || (info->data.ull == 0 &&
+		info->specifier == 'o')) && ((info->base == 8 || info->base == 16) &&
+		info->is_alt))
 	{
 		*place_sign = (info->base == 16) ? (2) : (1);
 		*nlen += *place_sign;
@@ -73,8 +74,7 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen, int *place_sign,
 		info->arg_size = (info->is_left_adj) ? (0) : (info->arg_cur - *nlen);
 	}
 	info->arg = my_strnew(info->arg_cur, ((info->is_zero_padd &&
-								!info->is_left_adj &&
-								!info->is_prec) ? ('0') : (' ')));
+		!info->is_left_adj && !info->is_prec) ? ('0') : (' ')));
 	if (!info->is_prec && info->is_zero_padd)
 		info->arg_size = 0;
 }
