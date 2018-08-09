@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -g -Wall -Werror -Wextra -pedantic
-TFLAGS := -g
+TFLAGS := -g -Wall -Werror -Wextra -pedantic
 IFLAGS := -I ./inc
 
 NAME := libftprintf.a

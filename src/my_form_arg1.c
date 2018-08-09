@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 16:57:27 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/28 17:07:04 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/09 17:59:35 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void			manage_arg(va_list *args, t_info *info)
 		update_result(info, info->arg, info->arg_cur);
 	if (info->arg)
 		free((void*)info->arg);
+	clear_info(info);
 }
