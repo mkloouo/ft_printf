@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 19:34:47 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/09 17:32:29 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/09 18:49:41 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			manage_custom(va_list *args, t_info *info)
 void			manage_pointer(va_list *args, t_info *info)
 {
 	info->data.p = va_arg(*args, void*);
+	// TODO: Fix zero pointer showing up as 0
 	info->is_alt = 1;
 	info->is_prec = 0;
 	info->specifier = 'x';
