@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:04:20 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/08 21:35:55 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/09 18:43:36 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 {
 	info->base = my_strlen(base_chars);
 	*nlen = my_numlen(info->data.ull, info->base);
-	if (info->data.ull == 0 &&
-		info->is_prec && info->precision == 0)
+	if (info->data.ull == 0 && ((info->is_prec && info->precision == 0) ||
+		(info->width == 0 && info->base == 8 && info->is_alt)))
 		*nlen = 0;
 	info->arg_cur = *nlen;
 	if (info->width > info->arg_cur)
