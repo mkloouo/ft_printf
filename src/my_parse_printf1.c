@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/08 21:35:39 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/09 18:04:40 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void			my_parse_star(char const **fmt, size_t *number,
 				va_list *args)
 {
 	if (**fmt == '*')
+	{
 		*number = va_arg(*args, int);
+		++*fmt;
+	}
 	else
 		*number = my_parse_number(fmt);
 }
