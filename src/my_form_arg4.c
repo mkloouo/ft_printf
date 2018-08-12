@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:05:38 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 18:04:14 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/12 19:26:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			manage_signed(va_list *args, t_info *info)
 	else if (info->size_flag == LONG_LONG_SIZE)
 		info->data.ll = va_arg(*args, long long);
 	else if (info->size_flag == SIZE_T_SIZE)
-		info->data.sst = va_arg(*args, size_t);
+		info->data.sst = va_arg(*args, ssize_t);
 	else
 		info->data.ll = va_arg(*args, int);
 	form_signed(info);
