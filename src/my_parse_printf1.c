@@ -6,13 +6,12 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/09 18:04:40 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/12 17:05:27 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <my_string.h>
-
 #include <my_parse_printf.h>
 
 void			my_parse_star(char const **fmt, size_t *number,
@@ -69,11 +68,7 @@ int				my_parse_specifier(char const **fmt, t_info *info)
 										: (**fmt);
 	if (!(test == 's' || test == 'c' || test == 'u' || test == 'o' ||
 		test == 'x' || test == 'i' || test == 'd' || test == 'p' ||
-		test == '%')
-		#if !defined(__MACH__) && !defined(__APPLE__)
-		|| **fmt == 'U'
-		#endif
-		)
+		test == '%'))
 		return (0);
 	if (**fmt == 'S' || **fmt == 'C' || **fmt == 'U' || **fmt == 'O' ||
 		**fmt == 'D')

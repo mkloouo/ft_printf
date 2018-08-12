@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 19:34:47 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/09 18:49:41 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/12 17:04:29 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ void			manage_custom(va_list *args, t_info *info)
 	(void)args;
 	if (info->specifier == '%')
 	{
-		#if defined (__MACH__) || defined (__APPLE__) 
 		info->arg_cur = (info->width) ? (info->width) : (1);
-		#else
-		info->arg_cur = (1);
-		#endif
 		info->arg = my_strnew(info->arg_cur, ' ');
 		info->arg[((info->is_left_adj) ? (0) : (info->arg_cur - 1))] = '%';
 	}
@@ -30,7 +26,6 @@ void			manage_custom(va_list *args, t_info *info)
 void			manage_pointer(va_list *args, t_info *info)
 {
 	info->data.p = va_arg(*args, void*);
-	// TODO: Fix zero pointer showing up as 0
 	info->is_alt = 1;
 	info->is_prec = 0;
 	info->specifier = 'x';

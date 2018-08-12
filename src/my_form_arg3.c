@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:04:20 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/09 18:43:36 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/12 18:04:09 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 		*nlen = 0;
 	info->arg_cur = *nlen;
 	if (info->width > info->arg_cur)
-		info->arg_cur = info->width;	
+		info->arg_cur = info->width;
 	if (info->precision > *nlen)
 		*nlen = info->precision;
 	if (*nlen > info->arg_cur)
@@ -68,8 +68,7 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 		info->is_alt))
 	{
 		*place_sign = (info->base == 16) ? (2) : (1);
-		*nlen += *place_sign;
-		if (*nlen > info->arg_cur)
+		if (((*nlen += *place_sign) == *nlen) && *nlen > info->arg_cur)
 			info->arg_cur = *nlen;
 		info->arg_size = (info->is_left_adj) ? (0) : (info->arg_cur - *nlen);
 	}
