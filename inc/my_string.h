@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:33:46 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 18:33:00 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 11:34:20 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 char const	*my_strchr(char const *haystack, char needle);
 void		my_putnstr(char *str, size_t n);
 void		my_strfill(char *str, size_t len, char ch);
+
 void		my_strncpy(char *dst, const char *src, size_t n);
+char		*my_wstrncpy(char *dst, wchar_t const *src, size_t n);
+
 char		*my_resize_str(const char *src, size_t size, size_t new_size);
 char		*my_strnew(size_t size, char c);
+
 size_t		my_wchar_size(wchar_t c);
 size_t		my_wstrlen(wchar_t const *str);
 size_t		my_wstrclen(wchar_t const *str);

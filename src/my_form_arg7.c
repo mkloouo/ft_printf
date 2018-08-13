@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 18:05:02 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 18:35:34 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 14:39:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,20 @@
 
 void			form_string(t_info *info)
 {
-	(void)info;
+	size_t		i;
+	size_t		len;
+	wchar_t		*str;
+
+	len = my_strlen(info->data.s);
+	str = malloc(sizeof(wchar_t) * (len + 1));
+	i = 0;
+	while (i < len)
+	{
+		str[i] = (wchar_t)info->data.s[i];
+		++i;
+	}
+	str[i] = 0;
+	info->data.ws = str;
+	form_wide_string(info);
+	free(str);
 }

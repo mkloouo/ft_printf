@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:04:20 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 18:04:09 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 10:35:40 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		form_digits(t_info *info, size_t nlen, size_t pos,
 }
 
 static void		form_unsigned_helper(t_info *info, size_t *nlen,
-				int *place_sign, char const *base_chars)
+				size_t *place_sign, char const *base_chars)
 {
 	info->base = my_strlen(base_chars);
 	*nlen = my_numlen(info->data.ull, info->base);
@@ -68,7 +68,7 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 		info->is_alt))
 	{
 		*place_sign = (info->base == 16) ? (2) : (1);
-		if (((*nlen += *place_sign) == *nlen) && *nlen > info->arg_cur)
+		if (((*nlen += *place_sign)) && *nlen > info->arg_cur)
 			info->arg_cur = *nlen;
 		info->arg_size = (info->is_left_adj) ? (0) : (info->arg_cur - *nlen);
 	}
@@ -81,7 +81,7 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 void			form_unsigned(t_info *info, char const *base_chars)
 {
 	size_t		nlen;
-	int			place_sign;
+	size_t		place_sign;
 
 	form_unsigned_helper(info, &nlen, &place_sign, base_chars);
 	if (info->is_left_adj)

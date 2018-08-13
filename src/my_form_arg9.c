@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 18:05:02 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 18:35:27 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 14:44:24 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 void			form_char(t_info *info)
 {
-	(void)info;
+	info->data.wc = (wchar_t)info->data.c;
+	form_wide_char(info);
 }
