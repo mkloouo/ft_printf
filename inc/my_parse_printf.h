@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:37:04 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/02 14:03:02 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 15:56:41 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdarg.h>
 # include <my_printf_info.h>
 
-void	my_parse_star(char const **fmt, size_t *number,
-		va_list *args);
+void	my_parse_star(char const **fmt, va_list *args, t_info *info,
+		int choice);
 void	my_manage_size_flag(char const **fmt, t_info *info,
 		t_size_f new_size, int move);
 void	my_parse_size_flags(char const **fmt, t_info *info);

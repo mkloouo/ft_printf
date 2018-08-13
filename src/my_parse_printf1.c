@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 17:05:27 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/13 15:56:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,36 @@
 #include <my_string.h>
 #include <my_parse_printf.h>
 
-void			my_parse_star(char const **fmt, size_t *number,
-				va_list *args)
+#if !defined(IS_WIDTH) && !defined(IS_PRECISION)
+# define IS_WIDTH 1
+# define IS_PRECISION 2
+#endif
+
+void			my_parse_star(char const **fmt, va_list *args, t_info *info,
+				int choice)
 {
+	ssize_t		tmp;
+
 	if (**fmt == '*')
 	{
-		*number = va_arg(*args, int);
+		tmp = va_arg(*args, int);
+		if (tmp < 0 && (tmp = -1 * tmp))
+			if (choice == IS_WIDTH)
+				info->is_left_adj = 1;
+
+		if (choice == IS_PRECISION)
+			info->precision = tmp;
+		else
+			info->precision = tmp;
 		++*fmt;
 	}
 	else
-		*number = my_parse_number(fmt);
+	{
+		if (choice == IS_WIDTH)
+			info->width = my_parse_number(fmt);
+		else if (choice == IS_PRECISION)
+			info->precision = my_parse_number(fmt);
+	}
 }
 
 void			my_manage_size_flag(char const **fmt, t_info *info,
@@ -91,12 +111,9 @@ int				my_validate_arg(char const **pos, char const **fmt,
 	save = *fmt;
 	++*fmt;
 	my_parse_flags(fmt, info);
-	my_parse_star(fmt, &info->width, args);
-	if (**fmt == '.' && ++*fmt)
-	{
-		info->is_prec = 1;
-		my_parse_star(fmt, &info->precision, args);
-	}
+	my_parse_star(fmt, args, info, IS_WIDTH);
+	if (**fmt == '.' && ++*fmt && (info->is_prec = 1))
+		my_parse_star(fmt, args, info, IS_PRECISION);
 	my_parse_size_flags(fmt, info);
 	if (!(is_valid = my_parse_specifier(fmt, info)))
 		*pos = save;
