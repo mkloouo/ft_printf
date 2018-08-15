@@ -16,9 +16,9 @@ IFLAGS = -I $(INC_DIR)
 
 NAME := libftprintf.a
 
-SRC_DIR := sources
-INC_DIR := includes
-OBJ_DIR := objects
+SRC_DIR := source
+INC_DIR := include
+OBJ_DIR := build
 
 SRCS := $(shell find $(SRC_DIR) -type f -name "*.c")
 DIRS := $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(shell find $(SRC_DIR) -type d))
