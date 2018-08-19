@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 18:05:02 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/13 15:06:32 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/19 10:25:15 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,4 @@ void			form_wide_string(t_info *info)
 		my_wstrncpy((info->arg + info->arg_size - info->arg_cur),
 			info->data.ws, info->arg_cur);
 	info->arg_cur = info->arg_size;
-} 
+}

@@ -6,7 +6,7 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:41:30 by modnosum          #+#    #+#              #
-#    Updated: 2018/08/13 16:42:16 by modnosum         ###   ########.fr        #
+#    Updated: 2018/08/19 10:25:05 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,3 +44,11 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJS)
 	ar -crs $@ $^
+
+IS_NORM_ENABLED := $(shell command -v norminette)
+norm:
+ifeq (,$(IS_NORM_ENABLED))
+	@echo "no norminette on your pc"
+else
+	@find . -type f -name "*.[ch]" -exec norminette {} \+
+endif

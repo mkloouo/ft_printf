@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/13 15:56:30 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/19 00:02:32 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void			my_parse_star(char const **fmt, va_list *args, t_info *info,
 		if (tmp < 0 && (tmp = -1 * tmp))
 			if (choice == IS_WIDTH)
 				info->is_left_adj = 1;
-
 		if (choice == IS_PRECISION)
 			info->precision = tmp;
 		else

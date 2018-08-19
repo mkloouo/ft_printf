@@ -6,13 +6,14 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:23:31 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/13 15:34:23 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/19 00:03:34 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <my_string.h>
 
-static void	write_more_than_one_byte(char *dst, wchar_t c, size_t wc_size, size_t *j)
+static void	write_more_than_one_byte(char *dst, wchar_t c,
+			size_t wc_size, size_t *j)
 {
 	if (wc_size == 2)
 	{
