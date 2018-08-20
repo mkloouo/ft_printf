@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:57:07 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/20 16:16:57 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 22:14:36 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ static void		clear_info_helper(t_info *info)
 
 void			clear_info(t_info *info)
 {
-	if (!info->init)
+	if (!info->result)
 	{
 		info->cur = 0;
 		info->size = 200;
 		info->result = my_strnew(info->size, 0);
-		info->init = 1;
 	}
 	info->width = 0;
 	info->precision = 0;
@@ -57,7 +56,7 @@ void			clear_info(t_info *info)
 
 void			init_info(t_info *info)
 {
-	info->init = 0;
+	info->result = 0;
 	clear_info(info);
 }
 

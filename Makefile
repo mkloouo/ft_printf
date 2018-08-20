@@ -6,7 +6,7 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:41:30 by modnosum          #+#    #+#              #
-#    Updated: 2018/08/20 13:11:40 by modnosum         ###   ########.fr        #
+#    Updated: 2018/08/20 22:49:11 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ all: $(NAME)
 
 clean:
 	@rm -fR $(OBJ_DIR)
+	@rm -fR test*
 	@echo "Partially cleaned up."
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:55:35 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/19 10:43:27 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 22:14:38 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct			s_info {
 	unsigned int		is_plus:1;
 
 	unsigned int		is_prec:1;
-	unsigned int		init:1;
 	unsigned int		is_pointer:1;
 
 	t_size_f			size_flag;

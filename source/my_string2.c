@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:32:32 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/20 16:07:04 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 20:26:09 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,20 @@ size_t		my_wstrlen(wchar_t const *str)
 	return (len);
 }
 
-size_t		my_wstrclen(wchar_t const *str)
+size_t		my_wstrclen(wchar_t const *str, int is_prec, size_t precision)
 {
 	size_t	i;
 	size_t	len;
+	size_t	wchar_size;
 
 	i = 0;
 	len = 0;
 	while (str[i])
 	{
-		len += my_wchar_size(str[i]);
+		wchar_size = my_wchar_size(str[i]);
+		if (is_prec && (len + wchar_size) > precision)
+			break ;
+		len += wchar_size;
 		++i;
 	}
 	return (len);

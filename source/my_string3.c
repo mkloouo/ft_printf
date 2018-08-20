@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/12 21:23:31 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/19 00:03:34 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 20:11:14 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ char		*my_wstrncpy(char *dst, wchar_t const *src, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if ((wc_size = my_wchar_size(*src)) == 1)
+		wc_size = my_wchar_size(*src);
+		if ((n - i) < wc_size)
+			break ;
+		if (wc_size == 1)
 			dst[i++] = (char)*src;
 		else
 			write_more_than_one_byte(dst, *src, wc_size, &i);

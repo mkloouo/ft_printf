@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:47:45 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/19 00:02:32 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 23:16:30 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,26 @@
 #include <my_string.h>
 #include <my_parse_printf.h>
 
-#if !defined(IS_WIDTH) && !defined(IS_PRECISION)
-# define IS_WIDTH 1
-# define IS_PRECISION 2
-#endif
-
-void			my_parse_star(char const **fmt, va_list *args, t_info *info,
-				int choice)
+int				my_parse_star(char const **fmt, va_list *args, size_t *assign,
+				int think_of_minus_as_minus_not_error)
 {
-	ssize_t		tmp;
+	int			hmm;
+	ssize_t		num;
 
 	if (**fmt == '*')
 	{
-		tmp = va_arg(*args, int);
-		if (tmp < 0 && (tmp = -1 * tmp))
-			if (choice == IS_WIDTH)
-				info->is_left_adj = 1;
-		if (choice == IS_PRECISION)
-			info->precision = tmp;
-		else
-			info->precision = tmp;
+		num = (ssize_t)va_arg(*args, int);
+		if ((hmm = (num < 0 && think_of_minus_as_minus_not_error)))
+			num = -num;
+		else if (num < 0)
+			num = 0;
+		*assign = num;
 		++*fmt;
+		return (hmm);
 	}
 	else
-	{
-		if (choice == IS_WIDTH)
-			info->width = my_parse_number(fmt);
-		else if (choice == IS_PRECISION)
-			info->precision = my_parse_number(fmt);
-	}
+		*assign = my_parse_number(fmt);
+	return (2);
 }
 
 void			my_manage_size_flag(char const **fmt, t_info *info,
@@ -110,9 +101,11 @@ int				my_validate_arg(char const **pos, char const **fmt,
 	save = *fmt;
 	++*fmt;
 	my_parse_flags(fmt, info);
-	my_parse_star(fmt, args, info, IS_WIDTH);
+	if (my_parse_star(fmt, args, &info->width, 1) == 1)
+		info->is_left_adj = 1;
 	if (**fmt == '.' && ++*fmt && (info->is_prec = 1))
-		my_parse_star(fmt, args, info, IS_PRECISION);
+		if (my_parse_star(fmt, args, &info->precision, 0) != 2)
+			info->is_prec = 0;
 	my_parse_size_flags(fmt, info);
 	if (!(is_valid = my_parse_specifier(fmt, info)))
 		*pos = save;

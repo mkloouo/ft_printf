@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 17:04:20 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/20 13:32:07 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 22:49:51 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ static void		form_unsigned_helper(t_info *info, size_t *nlen,
 {
 	info->base = my_strlen(base_chars);
 	*nlen = my_numlen(info->data.ull, info->base);
-	if (!info->is_pointer && info->data.ull == 0 &&
-		((info->is_prec && info->precision == 0)
-		|| (info->width == 0 && info->base == 8 && info->is_alt)))
+	if (info->data.ull == 0 && (!info->is_alt || (info->base == 16 &&
+		info->is_alt)) && (info->is_prec && info->precision == 0))
 		*nlen = 0;
 	info->arg_cur = (info->width > *nlen) ? (info->width) : (*nlen);
+	if (info->base == 8 && info->data.ull < 8 &&
+		info->is_prec && info->precision)
+		info->precision -= 1;
 	if (info->precision > *nlen)
 		*nlen = info->precision;
 	if (*nlen > info->arg_cur)
 		info->arg_cur = *nlen;
-	if (!(*place_sign = 0) && (info->data.ull > 0 || (info->data.ull == 0 &&
-		info->specifier == 'o') || info->is_pointer) &&
-		((info->base == 8 || info->base == 16) &&
-		info->is_alt))
+	if (!(*place_sign = 0) && info->is_alt && (info->data.ull > 0
+		|| info->is_pointer) && (info->base == 8 || info->base == 16))
 	{
 		*place_sign = (info->base == 16) ? (2) : (1);
 		if (((*nlen += *place_sign)) && *nlen > info->arg_cur)

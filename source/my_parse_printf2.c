@@ -6,16 +6,16 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:49:49 by modnosum          #+#    #+#             */
-/*   Updated: 2018/07/24 20:52:17 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 22:56:41 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <my_parse_printf.h>
 
-int		my_parse_number(char const **fmt)
+size_t		my_parse_number(char const **fmt)
 {
-	int	number;
+	size_t	number;
 
 	number = 0;
 	while (**fmt >= '0' && **fmt <= '9')
@@ -26,7 +26,7 @@ int		my_parse_number(char const **fmt)
 	return (number);
 }
 
-void	my_parse_flags(char const **fmt, t_info *info)
+void		my_parse_flags(char const **fmt, t_info *info)
 {
 	while (**fmt == '#' || **fmt == '0' || **fmt == '-' ||
 			**fmt == ' ' || **fmt == '+')

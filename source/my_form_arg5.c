@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 19:34:47 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/20 13:32:12 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 22:11:26 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void			manage_pointer(va_list *args, t_info *info)
 {
 	info->data.p = va_arg(*args, void*);
 	info->is_pointer = 1;
-	info->is_prec = 0;
 	info->is_alt = 1;
 	info->specifier = 'x';
 	info->size_flag = LONG_LONG_SIZE;
