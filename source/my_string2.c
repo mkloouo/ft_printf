@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:32:32 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/12 21:23:23 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 16:07:04 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char		*my_strnew(size_t size, char c)
 	i = 0;
 	while (i < size)
 		str[i++] = c;
+	str[i] = 0;
 	return (str);
 }
 

@@ -6,27 +6,27 @@
 #    By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/13 16:41:30 by modnosum          #+#    #+#              #
-#    Updated: 2018/08/19 11:20:51 by modnosum         ###   ########.fr        #
+#    Updated: 2018/08/20 13:11:40 by modnosum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_DIR := source
-INC_DIR := include
-OBJ_DIR := build
+SRC_DIR 		:= source
+INC_DIR 		:= include
+OBJ_DIR 		:= build
 
-CC		:= gcc
-TFLAGS	:= -g
-CFLAGS	:= -Wall -Werror -Wextra -pedantic $(TFLAGS)
-IFLAGS	:= -I $(INC_DIR)
-LFLAGS	:= -l ftprintf -L .
+CC				:= gcc
+TFLAGS			:= -g
+CFLAGS			:= -Wall -Werror -Wextra -pedantic $(TFLAGS)
+IFLAGS			:= -I $(INC_DIR)
+LFLAGS			:= -l ftprintf -L .
 
-NAME	:= libftprintf.a
+NAME			:= libftprintf.a
 
 IS_NORM_ENABLED	:= $(shell command -v norminette)
 
-SRCS	:= $(shell find $(SRC_DIR) -type f -name "*.c")
-DIRS	:= $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(shell find $(SRC_DIR) -type d))
-OBJS	:= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
+SRCS			:= $(shell find $(SRC_DIR) -type f -name "*.c")
+DIRS			:= $(patsubst $(SRC_DIR)%,$(OBJ_DIR)%,$(shell find $(SRC_DIR) -type d))
+OBJS			:= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
 .PHONY: all clean fclean re test f c n t 
 

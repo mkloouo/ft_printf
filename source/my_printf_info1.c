@@ -6,7 +6,7 @@
 /*   By: modnosum <modnosum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 20:57:07 by modnosum          #+#    #+#             */
-/*   Updated: 2018/08/19 10:44:43 by modnosum         ###   ########.fr       */
+/*   Updated: 2018/08/20 16:16:57 by modnosum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void			print_result(const char *fmt, const char *p, t_info *info)
 {
 	update_result(info, p, (fmt - p));
 	my_putnstr(info->result, info->cur);
-	free((void*)info->result);
+	if (info->result)
+		free((void*)info->result);
 }
 
 static void		clear_info_helper(t_info *info)
 {
 	info->is_pointer = 0;
 	info->arg_cur = 0;
+	info->base = 10;
 }
 
 void			clear_info(t_info *info)
